@@ -1,0 +1,12 @@
+{
+  "name": "ServiceOnWheels",
+  "displayName": "ServiceOnWheels",
+  "expo": {
+    "name": "ServiceOnWheels",
+    "slug": "ServiceOnWheels",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
