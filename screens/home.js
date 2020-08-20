@@ -12,25 +12,31 @@ class Home extends Component{
                     <View style={styles.container}>
                         <TouchableOpacity style={styles.btn} >
                             <Image source={{ uri: imageURL }} style={ styles.topImage } />
-                            <Text style={styles.title}>Car Meet</Text>
-                            <Text style={styles.bio}>Location: 5601 Blvd East</Text>
-                            <Text style={styles.bio}>Rules: burnouts</Text>
+                            <View style={styles.btnInner}>
+                                <Text style={styles.title}>Car Meet</Text>
+                                <Text style={styles.bio}>Location: 5601 Blvd East</Text>
+                                <Text style={styles.bio}>Rules: burnouts</Text>
+                            </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.container}>
                         <TouchableOpacity style={styles.btn} >
                             <Image source={{ uri: imageURL }} style={ styles.topImage } />
-                            <Text style={styles.title}>Burn Out Meet</Text>
-                            <Text style={styles.bio}>Location: 5601 Blvd East</Text>
-                            <Text style={styles.bio}>Rules: burnouts</Text>
+                                <View style={styles.btnInner}>
+                                <Text style={styles.title}>Burn Out Meet</Text>
+                                <Text style={styles.bio}>Location: 5601 Blvd East</Text>
+                                <Text style={styles.bio}>Rules: burnouts</Text>
+                            </View>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.container}>
                         <TouchableOpacity style={styles.btn} >
                             <Image source={{ uri: imageURL }} style={ styles.topImage } />
-                            <Text style={styles.title}>Cars and Coffee</Text>
-                            <Text style={styles.bio}>Location: 5601 Blvd East</Text>
-                            <Text style={styles.bio}>Rules: No revving, burnouts and...</Text>
+                            <View style={styles.btnInner}>
+                                <Text style={styles.title}>Cars and Coffee</Text>
+                                <Text style={styles.bio}>Location: 5601 Blvd East</Text>
+                                <Text style={styles.bio}>Rules: No revving, burnouts and...</Text>
+                            </View>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
@@ -70,14 +76,19 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 5,
         borderTopLeftRadius: 5,
         backgroundColor: 'white'
-
     },
 
     btn: {
-        backgroundColor: 'skyblue',
+        backgroundColor: 'transparent',
+        height: '100%',
+        marginBottom: 10
+    },
+
+    btnInner: {
+        backgroundColor: '#003f5c',
         borderBottomRightRadius: 5,
         borderBottomLeftRadius: 5,
-        height: 275
+        paddingBottom: 15
     },
 
     title: {
@@ -87,7 +98,8 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginLeft: 10,
         marginRight: 10,
-        width: '100%'
+        width: '100%',
+        color: 'white'
     },
 
     bio: {
@@ -97,7 +109,8 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginLeft: 10,
         marginRight: 10,
-        width: '100%'
+        width: '100%',
+        color: 'white'
     }
 });
 
