@@ -6,7 +6,6 @@ const imageURL = "https://images.pexels.com/photos/733745/pexels-photo-733745.jp
 class Home extends Component{
     render() {
         return(
-            <View>
             <SafeAreaView>
                 <ScrollView style={styles.main}>
                     <View style={styles.container}>
@@ -41,7 +40,6 @@ class Home extends Component{
                     </View>
                 </ScrollView>
             </SafeAreaView>
-            </View>
         )
     }
 }
@@ -66,7 +64,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.2,
         shadowRadius: 6,
-
         elevation: 1,
     },
 
