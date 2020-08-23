@@ -8,13 +8,12 @@ class Profile extends Component{
     render() {
         return(
             <SafeAreaView style={styles.main}>
-                
                 <View style={styles.info}>
                     <View style={styles.hover} > 
                         <Text>Test</Text>
                     </View>
                 </View>
-                 <ImageBackground source={image} style={{ flex: 1, resizeMode: 'cover', justifyContent: "center"}} blurRadius={5}>
+                 <ImageBackground source={image} style={{ flex: 1, resizeMode: 'cover', justifyContent: "center", zIndex: -999}} blurRadius={5}>
                     <View style={styles.profilePhoto}>
                         <Gravatar options={{ 
                             email: 'Ramialhussein98@gmail.com', 
@@ -48,11 +47,11 @@ const styles = StyleSheet.create({
         zIndex: 1,
         marginTop: 375,
         width: '100%',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
 
     hover: {
-        backgroundColor: 'red',
+        backgroundColor: '#003f5c',
         height: '100%',
         justifyContent: 'center',
         margin: 15,
@@ -65,7 +64,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 15,
         elevation: 1
-        
     },
 
     container: {
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
         height: 200, 
         borderWidth: 1,
         borderColor: 'white', 
-        borderRadius: 100
+        borderRadius: 100,
       }
 })
 
