@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { Gravatar, GravatarApi } from 'react-native-gravatar';
 
 const image = { uri: "https://images.pexels.com/photos/1098662/pexels-photo-1098662.jpeg" }
@@ -8,11 +8,6 @@ class Profile extends Component{
     render() {
         return(
             <SafeAreaView style={styles.main}>
-                <View style={styles.info}>
-                    <View style={styles.hover} > 
-                        <Text>Test</Text>
-                    </View>
-                </View>
                  <ImageBackground source={image} style={{ flex: 1, resizeMode: 'cover', justifyContent: "center", zIndex: -999}} blurRadius={5}>
                     <View style={styles.profilePhoto}>
                         <Gravatar options={{ 
@@ -23,6 +18,42 @@ class Profile extends Component{
                         />
                     </View>
                 </ImageBackground>
+                <View style={styles.info}>
+                    <View style={styles.hover} > 
+                        <View style={{ flex: 1, flexDirection: 'row', margin: 20, marginBottom: 5}}>
+                            <View style={{ width: '50%', height: '100%', alignItems: 'center' }}>
+                                <TouchableOpacity style={{ backgroundColor: '#fb5b5a', width: '80%', borderRadius: 10 }}>
+                                    <Text style={{textAlign: 'center', fontSize: 16, margin: 15 }}>Follow</Text>
+                                </TouchableOpacity>
+                            </View>
+                                
+                            <View style={{ width: '50%', height: '100%', alignItems: 'center' }}>
+                                <TouchableOpacity style={{ backgroundColor: '#fb5b5a', width: '80%', borderRadius: 10 }}>
+                                    <Text style={{textAlign: 'center', fontSize: 16, margin: 15 }}>Message</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', margin: 20}}>
+                            <View style={{ width: '25%', height: '50%', alignItems: 'center' }}>
+                                <Text style={{ color: 'white' }}>Follwers</Text>
+                                <Text style={{ color: 'white', margin: 10 }}>0</Text>
+                            </View>
+                            <View style={{ width: '25%', height: '50%', alignItems: 'center' }}>
+                                <Text style={{ color: 'white' }}>Following</Text>
+                                <Text style={{ color: 'white', margin: 10 }}>0</Text>
+                            </View>
+                            <View style={{ width: '25%', height: '50%', alignItems: 'center' }}>
+                                <Text style={{ color: 'white' }}>Cars</Text>
+                                <Text style={{ color: 'white', margin: 10 }}>0</Text>
+                            </View>
+                            <View style={{ width: '25%', height: '50%', alignItems: 'center' }}>
+                                <Text style={{ color: 'white' }}>Events</Text>
+                                <Text style={{ color: 'white', margin: 10 }}>0</Text>
+                            </View>
+                        </View>
+                        
+                    </View>
+                </View>
                 <View style={styles.container} />
             </SafeAreaView>
         )
@@ -43,18 +74,15 @@ const styles = StyleSheet.create({
 
     info: {
         position: 'absolute',
-        height: 150,
         zIndex: 1,
-        marginTop: 375,
+        marginTop: 325,
         width: '100%',
-        justifyContent: 'center'
     },
 
     hover: {
         backgroundColor: '#003f5c',
         height: '100%',
-        justifyContent: 'center',
-        margin: 15,
+        margin: 25,
         borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {
@@ -82,7 +110,7 @@ const styles = StyleSheet.create({
         height: 200, 
         borderWidth: 1,
         borderColor: 'white', 
-        borderRadius: 100,
+        borderRadius: 100
       }
 })
 
