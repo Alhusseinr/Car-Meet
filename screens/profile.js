@@ -1,60 +1,63 @@
 import React, { Component } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
+import Constants from 'expo-constants';
 import { Gravatar, GravatarApi } from 'react-native-gravatar';
-
 const image = { uri: "https://images.pexels.com/photos/1098662/pexels-photo-1098662.jpeg" }
 
 class Profile extends Component{
+
     render() {
         return(
             <SafeAreaView style={styles.main}>
-                 <ImageBackground source={image} style={{ flex: 1, resizeMode: 'cover', justifyContent: "center", zIndex: -999}} blurRadius={5}>
-                    <View style={styles.profilePhoto}>
-                        <Gravatar options={{ 
-                            email: 'Ramialhussein98@gmail.com', 
-                            parameters: { "size": "450", "d": "mm" }, 
-                            secure: true }} 
-                            style={styles.roundedProfileImage} 
-                        />
-                    </View>
-                </ImageBackground>
-                <View style={styles.info}>
-                    <View style={styles.hover} > 
-                        <View style={{ flex: 1, flexDirection: 'row', margin: 20, marginBottom: 5}}>
-                            <View style={{ width: '50%', height: '100%', alignItems: 'center' }}>
-                                <TouchableOpacity style={{ backgroundColor: '#fb5b5a', width: '80%', borderRadius: 10 }}>
-                                    <Text style={{textAlign: 'center', fontSize: 16, margin: 15 }}>Follow</Text>
+                <ScrollView>
+                    <ImageBackground source={image} style={{ flex: 1, resizeMode: 'cover', justifyContent: "center", zIndex: -999, height: 400}} blurRadius={5}>
+                        <View style={styles.profilePhoto}>
+                            <Gravatar options={{ 
+                                email: 'Ramialhussein98@gmail.com', 
+                                parameters: { "size": "450", "d": "mm" }, 
+                                secure: true }} 
+                                style={styles.roundedProfileImage} 
+                            />
+                        </View>
+                    </ImageBackground>
+                    <View style={styles.info}>
+                        <View style={styles.hover} > 
+                            <View style={{ flex: 1, flexDirection: 'row', margin: 20, marginBottom: 0}}>
+                                <View style={{ width: '50%', height: '100%', alignItems: 'center' }}>
+                                    <TouchableOpacity style={{ backgroundColor: '#fb5b5a', width: '80%', borderRadius: 10 }}>
+                                        <Text style={{textAlign: 'center', fontSize: 16, margin: 15 }}>Follow</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                    
+                                <View style={{ width: '50%', height: '100%', alignItems: 'center' }}>
+                                    <TouchableOpacity style={{ backgroundColor: '#fb5b5a', width: '80%', borderRadius: 10 }}>
+                                        <Text style={{textAlign: 'center', fontSize: 16, margin: 15 }}>Message</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <View style={{ flex: 1, flexDirection: 'row', margin: 20}}>
+                                <TouchableOpacity style={{ width: '25%', height: '50%', alignItems: 'center' }}>
+                                    <Text style={{ color: 'white' }}>Follwers</Text>
+                                    <Text style={{ color: 'white', margin: 10 }}>1,584</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ width: '25%', height: '50%', alignItems: 'center' }}>
+                                    <Text style={{ color: 'white' }}>Following</Text>
+                                    <Text style={{ color: 'white', margin: 10 }}>2,957</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ width: '25%', height: '50%', alignItems: 'center' }}>
+                                    <Text style={{ color: 'white' }}>Cars</Text>
+                                    <Text style={{ color: 'white', margin: 10 }}>3</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ width: '25%', height: '50%', alignItems: 'center' }}>
+                                    <Text style={{ color: 'white' }}>Events</Text>
+                                    <Text style={{ color: 'white', margin: 10 }}>10</Text>
                                 </TouchableOpacity>
                             </View>
-                                
-                            <View style={{ width: '50%', height: '100%', alignItems: 'center' }}>
-                                <TouchableOpacity style={{ backgroundColor: '#fb5b5a', width: '80%', borderRadius: 10 }}>
-                                    <Text style={{textAlign: 'center', fontSize: 16, margin: 15 }}>Message</Text>
-                                </TouchableOpacity>
-                            </View>
+                            
                         </View>
-                        <View style={{ flex: 1, flexDirection: 'row', margin: 20}}>
-                            <View style={{ width: '25%', height: '50%', alignItems: 'center' }}>
-                                <Text style={{ color: 'white' }}>Follwers</Text>
-                                <Text style={{ color: 'white', margin: 10 }}>0</Text>
-                            </View>
-                            <View style={{ width: '25%', height: '50%', alignItems: 'center' }}>
-                                <Text style={{ color: 'white' }}>Following</Text>
-                                <Text style={{ color: 'white', margin: 10 }}>0</Text>
-                            </View>
-                            <View style={{ width: '25%', height: '50%', alignItems: 'center' }}>
-                                <Text style={{ color: 'white' }}>Cars</Text>
-                                <Text style={{ color: 'white', margin: 10 }}>0</Text>
-                            </View>
-                            <View style={{ width: '25%', height: '50%', alignItems: 'center' }}>
-                                <Text style={{ color: 'white' }}>Events</Text>
-                                <Text style={{ color: 'white', margin: 10 }}>0</Text>
-                            </View>
-                        </View>
-                        
                     </View>
-                </View>
-                <View style={styles.container} />
+                    <View style={styles.container} />
+                </ScrollView>
             </SafeAreaView>
         )
     }
