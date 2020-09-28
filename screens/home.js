@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
 
-const imageURL = "https://images.pexels.com/photos/733745/pexels-photo-733745.jpeg";
+const imageURL1 = "https://images.cdn.circlesix.co/image/1/640/0/uploads/posts/2017/06/e23f7266480450c659474b10d6f26088.jpg";
+const imageURL2 = "https://i.ytimg.com/vi/z3PWDm1FPFs/maxresdefault.jpg";
+const imageURL3 = "https://lh3.googleusercontent.com/proxy/F8kOHFF61KRAPa0KX74haggxq5XH2zQO2a5YN8hxOFKQ79li08Ybv2LrK7PCwYe26zVLPQvpEiI4daC0mZo0JP5sPYRDwj7UtZ0iTFrFVMjdiOW13W3KyQjXS2X4vHRaUY4Mj6sEUamiC0gbvU3oxl3RjCj7-n9FBckS1HPHGQ";
+
 
 class Home extends Component{
     render() {
@@ -10,7 +13,7 @@ class Home extends Component{
                 <ScrollView style={styles.main}>
                     <View style={styles.container}>
                         <TouchableOpacity style={styles.btn} >
-                            <Image source={{ uri: imageURL }} style={ styles.topImage } />
+                            <Image source={{ uri: imageURL1 }} style={ styles.topImage } />
                             <View style={styles.btnInner}>
                                 <Text style={styles.title}>Car Meet</Text>
                                 <Text style={styles.bio}>Location: 5601 Blvd East</Text>
@@ -20,7 +23,7 @@ class Home extends Component{
                     </View>
                     <View style={styles.container}>
                         <TouchableOpacity style={styles.btn} >
-                            <Image source={{ uri: imageURL }} style={ styles.topImage } />
+                            <Image source={{ uri: imageURL2 }} style={ styles.topImage } />
                                 <View style={styles.btnInner}>
                                 <Text style={styles.title}>Burn Out Meet</Text>
                                 <Text style={styles.bio}>Location: 5601 Blvd East</Text>
@@ -30,7 +33,7 @@ class Home extends Component{
                     </View>
                     <View style={styles.container}>
                         <TouchableOpacity style={styles.btn} >
-                            <Image source={{ uri: imageURL }} style={ styles.topImage } />
+                            <Image source={{ uri: imageURL3 }} style={ styles.topImage } />
                             <View style={styles.btnInner}>
                                 <Text style={styles.title}>Cars and Coffee</Text>
                                 <Text style={styles.bio}>Location: 5601 Blvd East</Text>
