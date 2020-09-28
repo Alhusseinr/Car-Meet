@@ -6,6 +6,8 @@ module.exports = {
         const { name, username, email, dob, password, followers, follwoing, posts, active } = userInfo;
         const hash = bcrypt.hashSync(password, 10);
 
+        console.log("i get here");
+
         return db.insert({
             name,
             username,
@@ -23,7 +25,7 @@ module.exports = {
     }),
     getUser: (userInfo) => new Promise((resolve, reject) => {
         const { email } = userInfo;
-        
+
         return db.select('*')
             .from('users')
             .where('email', '=', email)
