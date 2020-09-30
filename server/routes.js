@@ -1,5 +1,5 @@
 const wrap = require('./asyncWrapper');
-const userController = require('./controllers').users
+const userController = require('./controllers').users;
 const path = require("path");
 
 module.exports = router => {
@@ -9,4 +9,6 @@ module.exports = router => {
 
     router.route('/api/user')
         .post(userController.create)
+        .get(userController.pullUser)
+        .delete(userController.deleteUser)
 };
