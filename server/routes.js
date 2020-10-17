@@ -14,5 +14,6 @@ module.exports = router => {
 
     router.route('/api/event')
         .post(eventController.create)
-        .delete(eventController.deleteEvents)
+        .get(eventController.getEvent)
+        .delete(eventController.deleteEvent)
 };
