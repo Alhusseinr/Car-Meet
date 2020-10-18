@@ -1,6 +1,8 @@
 const wrap = require('./asyncWrapper');
 const userController = require('./controllers').users;
 const eventController = require('./controllers').event;
+const addressController = require('./controllers').address;
+
 
 module.exports = router => {
     router.get('/api/test', wrap(async (req, res) => {
@@ -15,5 +17,8 @@ module.exports = router => {
     router.route('/api/event')
         .post(eventController.create)
         .get(eventController.getEvent)
-        .delete(eventController.deleteEvent)
+        .delete(eventController.deleteEvent);
+
+    router.route('/api/test')
+        .post(addressController.create)
 };

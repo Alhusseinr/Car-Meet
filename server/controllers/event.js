@@ -1,35 +1,60 @@
 const eventServices = require('../services/eventServices');
+const eventAddress = require('../services/addressServices');
 
 module.exports = {
     create(req, res) {
         console.log("controller");
-        const eventInfo = { name, addressId, numberOfAttendees, rules, dateTime, eventCode } = req.body;
+        const eventInfo = { name, addressId, numberOfAttendees, rules, dateTime, eventCode, address1, address2, city, state, zipcode } = req.body;
         eventInfo.eventCode = (Math.floor(Math.random() * 1000) + 1000);
-        console.log(eventInfo);
+        const eventAddresses = {
+            address1: eventInfo.address1,
+            address2: eventInfo.address2,
+            city: eventInfo.city,
+            state: eventInfo.state,
+            zipcode: eventInfo.zipcode,
+            eventCode: eventInfo.eventCode
+        };
+        // console.log(eventInfo, eventAddress);
 
         eventServices
             .pullEvent(eventInfo)
             .then(event => {
                 if(event) {
                     eventInfo.eventCode = (Math.floor(Math.random() * 1000) + 1000);
-
-                    eventServices
-                        .createMeet(eventInfo)
-                        .then(meet => {
-                            return res.status(200).json({
-                                meet
-                            })
-                        })
-                        .catch(e => res.status(400).json({ error: e }))
+                    eventAddresses.eventCode = eventInfo.eventCode;
+                    console.log(eventAddresses, eventInfo);
+                    eventAddress
+                        .createAddress(eventAddresses)
+                        .then(data => {
+                           console.log(data);
+                           eventInfo.addressId = data.id;
+                            eventServices
+                                .createMeet(eventInfo)
+                                .then(meet => {
+                                    return res.status(200).json({
+                                        meet
+                                    })
+                                })
+                                .catch(e => res.status(400).json({ error: e }))
+                        });
                 } else {
-                    eventServices
-                        .createMeet(eventInfo)
-                        .then(meet => {
-                            return res.status(200).json({
-                                meet
-                            })
-                        })
-                        .catch(e => res.status(400).json({ error: e }))
+                    eventAddresses.eventCode = eventInfo.eventCode;
+                    // gotta fix this
+                    console.log("here", eventInfo);
+                    eventAddress
+                        .createAddress(eventAddresses)
+                        .then(data => {
+                            console.log(data);
+                            eventInfo.addressId = data.id;
+                            eventServices
+                                .createMeet(eventInfo)
+                                .then(meet => {
+                                    return res.status(200).json({
+                                        meet
+                                    })
+                                })
+                                .catch(e => res.status(400).json({ error: e }))
+                        });
                 }
             }).catch(e => res.status(400).json({ error: e }))
     },
@@ -70,5 +95,6 @@ module.exports = {
                 return res.status(200).json({ msg: 'event deleted' })
             })
             .catch(e => res.status(400).json(e))
-    }
+    },
 };
+

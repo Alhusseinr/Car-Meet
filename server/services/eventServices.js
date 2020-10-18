@@ -21,7 +21,7 @@ module.exports = {
 
     pullEvent: (eventInfo) => new Promise((resolve, reject) => {
         console.log('services');
-        const {eventCode} = eventInfo;
+        const { eventCode } = eventInfo;
 
         return db.select('*')
             .from('events')
