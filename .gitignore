@@ -62,4 +62,4 @@ buck-out/
 .expo/*
 web-build/
 .env/
-server/.env/
+/server/.env/
