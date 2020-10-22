@@ -31,6 +31,32 @@ module.exports = {
             .catch(e => reject(e));
     }),
 
+    getAllUsers: () => new Promise((resolve, reject) => {
+        db.select('*')
+            .from('users')
+            .then(users => resolve(users))
+            .catch(e => reject(e))
+    }),
+
+    updateUser: (userInfo) => new Promise((resolve, reject) => {
+        console.log("service info", userInfo);
+        const { id, username, email, password } = userInfo;
+
+        const payload = {};
+        if (username) { payload.username = username; }
+        if (email) { payload.email = email; }
+        if (password) { payload.password = password }
+
+        console.log("payload", payload);
+
+        db.select('*')
+            .from('users')
+            .where('id', '=', id)
+            .update(payload)
+            .then(result => resolve(result))
+            .catch(e => reject({ msg: 'from services', e }))
+    }),
+
     deleteUser: (id, username, email) => new Promise((resolve, reject) => {
         db.select('id', 'username', 'email')
             .from('users')

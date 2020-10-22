@@ -49,6 +49,25 @@ module.exports = {
             })
     },
 
+    list(req, res) {
+        return userServices
+            .getAllUsers()
+            .then(users => {
+                return res.status(200).json(users)
+            })
+            .catch(e => res.status(400).json(e))
+    },
+
+    updateUser(req, res) {
+        const { id, username, email, password } = req.body;
+        const userInfo = { id, username, email, password };
+        console.log("controller info", userInfo);
+        return userServices
+            .updateUser(userInfo)
+            .then(() => { return res.status(200).json({ msg: 'user updated' })})
+            .catch(e => { return res.status(400).json({ msg: 'no bueno', e })})
+    },
+
     deleteUser(req, res) {
         const userInfo = { id, username, email } = req.body;
         console.log(userInfo);

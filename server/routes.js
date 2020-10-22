@@ -11,14 +11,14 @@ module.exports = router => {
     router.route('/api/user')
         .post(userController.create)
         .get(userController.pullUser)
+        .put(userController.updateUser)
         .delete(userController.deleteUser);
+    router.get('/api/user/all', userController.list);
 
     router.route('/api/event')
         .post(eventController.create)
         .get(eventController.getEvent)
         .delete(eventController.deleteEvent)
         .put(eventController.updateEvent);
-
-    router.route('/api/allEvents')
-        .get(eventController.getAllEvents);
+    router.get('/api/event/all', eventController.getAllEvents);
 };
