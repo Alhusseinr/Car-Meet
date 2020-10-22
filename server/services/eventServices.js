@@ -25,23 +25,53 @@ module.exports = {
 
         return db.select('*')
             .from('events')
-            .where('eventCode', '=', eventCode)
+            .where('events.eventCode', '=', eventCode)
+            .innerJoin('addresses', 'addresses.eventCode', 'events.eventCode')
             .then(event => event ? resolve(event[0]) : reject({ error: 'no event found' }))
             .catch(e => reject(e));
     }),
 
-    deleteEvent: (id) => new Promise((resolve, reject) => {
-        db.select('id')
+    pullAllEvents: () => new Promise((resolve, reject) => {
+       console.log('services');
+       return db.select('*')
+           .from('events')
+           .innerJoin('addresses', 'addresses.eventCode', 'events.eventCode')
+           .then(events => events ? resolve(events) : reject({ error: 'there are no events' }))
+           .catch(e => reject(e))
+    }),
+
+    updateEvent: (eventInfo) => new Promise((resolve, reject) => {
+        console.log('services');
+        const { eventCode, name, numberOfAttendees, rules, dateTime } = eventInfo;
+
+        const payload = {};
+        if (name) { payload.name = name; }
+        if (numberOfAttendees) { payload.numberOfAttendees = numberOfAttendees; }
+        if (rules) { payload.rules = rules; }
+        if (dateTime) { payload.dateTime = dateTime }
+        console.log("payload", payload);
+
+        db.select('*')
             .from('events')
-            .where('id', '=', id)
+            .where('eventCode', '=', eventCode)
+            .update(payload)
+            .then(updatedEvent => resolve(updatedEvent))
+            .catch(e => reject({ msg: 'from services: ', e }))
+
+    }),
+
+    deleteEvent: (eventCode) => new Promise((resolve, reject) => {
+        db.select('eventCode')
+            .from('events')
+            .where('eventCode', '=', eventCode)
             .then(data => {
                 console.log(data[0] === undefined);
                 if (data[0] !== undefined) {
-                    return db.select('id')
+                    return db.select('eventCode')
                         .from('events')
-                        .where('id', '=', id)
+                        .where('eventCode', '=', eventCode)
                         .del()
-                        .then(user => resolve({ user, msg: 'event deleted' }))
+                        .then(event => resolve({ event, msg: 'event deleted' }))
                         .catch(e => reject(e))
                 }
                 return reject({ msg: 'event does not exist' })
