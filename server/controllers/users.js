@@ -1,4 +1,6 @@
 const userServices = require('../services/userServices');
+const bcrypt = require("bcryptjs");
+const auth = require('../auth');
 
 module.exports = {
     create(req, res) {
@@ -78,5 +80,33 @@ module.exports = {
                 return res.status(200).json({ msg: 'user deleted' })
             })
             .catch(e => res.status(400).json(e))
+    },
+
+    login(req, res) {
+        const userInfo = { email, password } = req.body;
+
+        userServices
+            .getUser(userInfo)
+            .then(user => {
+                const payload = {};
+                if(user) {
+                    if(bcrypt.compareSync(password, user.password)) {
+                        payload.user = {
+                            id: user.id,
+                            username: user.username,
+                            email: user.email,
+                        };
+                        const data = auth.createJWT(payload.user);
+                        payload.Token = 'Bearer ' + data;
+                        return res.status(200).json(payload);
+                    }
+                    return res.status(400).json({ msg: 'Wrong email or password' })
+                }
+                return res.status(400).json({ msg: 'User does no exist' })
+            })
+            .catch(e => {
+                return res.status(400).json({ msg: 'Something went wrong: ' + e })
+            })
+
     }
 };

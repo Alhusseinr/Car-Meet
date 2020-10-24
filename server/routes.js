@@ -14,6 +14,7 @@ module.exports = router => {
         .put(userController.updateUser)
         .delete(userController.deleteUser);
     router.get('/api/user/all', userController.list);
+    router.post('/api/user/login', userController.login);
 
     router.route('/api/event')
         .post(eventController.create)
