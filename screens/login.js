@@ -10,17 +10,75 @@ import {
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
+import {AsyncStorage} from "react-native-web";
+import axios from 'axios';
+import { Button } from 'react-native-paper';
+
 
 export default class Login extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            username: '',
-            password: ''
+            email: '',
+            password: '',
+            error: {},
+            token: ''
         }
-
     }
+
+    handleEmailChnage = (email) => {
+        this.setState({ email:email });
+    };
+
+    handlePasswordChange = (password) => {
+        this.setState({ password: password });
+    };
+
+    _storeToken = async (token) => {
+        try{
+            await AsyncStorage.setItem('token', token);
+        } catch (e) {
+            console.log(e)
+        }
+    };
+
+    _retrieveToken = async () => {
+        try{
+            const value = await AsyncStorage.getItem('token');
+            if(value !== null){
+                console.log('token in localStorage: ', value);
+                return value;
+            }
+            return value;
+        } catch (e) {
+          console.log(e)
+        }
+    };
+
+    handleLogin = async () => {
+        const { email, password } = this.state;
+        const errors = this.isEmpty(email, password);
+        this.setState({ errors });
+
+        console.log(email, password);
+
+        if(Object.keys(errors).length === 0) {
+            axios.post('http://127.0.0.1:5000/api/user/login', { email, password })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(e => console.log(e))
+        }
+    };
+
+    isEmpty = (email, password) => {
+        const errors = {};
+        if(!email) errors.email = "Email can't be blank";
+        if(!password) errors.password = "Password can't be blank";
+        return errors;
+    };
+
     render() {
 
         return(
@@ -34,10 +92,10 @@ export default class Login extends Component{
                         <View style={styles.inputView}>
                             <TextInput
                                 style={ styles.inputText }
-                                value={this.state.username}
-                                placeholder='Username'
+                                value={this.state.email}
+                                placeholder='Email'
                                 placeholderTextColor='#003f5c'
-                                onChangeText={text => this.setState({ username: text })}
+                                onChangeText={text => this.setState({ email: text })}
                             />
                         </View>
                         <View style={styles.inputView}>
@@ -53,11 +111,14 @@ export default class Login extends Component{
                         <TouchableOpacity>
                             <Text style={styles.forgot}>Forgot Password</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.loginBtn} onPress={() => {console.log('hello')}}>
+                        <Button title="LOGIN" onPress={this.handleLogin} mode="contained" style={{ marginTop: 15, padding: 5 }} color="#E9190F" >
+                            Login
+                        </Button>
+                        <TouchableOpacity style={styles.loginBtn} onPress={() => {this.handleLogin}}>
                             <Text style={styles.loginText}>Login</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.signupBtn}>
-                            <Text style={styles.loginText}>Sign Up</Text>
+                            <Text style={styles.loginText}>Register</Text>
                         </TouchableOpacity>
                     </View>
                 </TouchableWithoutFeedback>

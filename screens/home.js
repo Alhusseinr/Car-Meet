@@ -5,7 +5,6 @@ const imageURL1 = "https://images.cdn.circlesix.co/image/1/640/0/uploads/posts/2
 const imageURL2 = "https://i.ytimg.com/vi/z3PWDm1FPFs/maxresdefault.jpg";
 const imageURL3 = "https://lh3.googleusercontent.com/proxy/F8kOHFF61KRAPa0KX74haggxq5XH2zQO2a5YN8hxOFKQ79li08Ybv2LrK7PCwYe26zVLPQvpEiI4daC0mZo0JP5sPYRDwj7UtZ0iTFrFVMjdiOW13W3KyQjXS2X4vHRaUY4Mj6sEUamiC0gbvU3oxl3RjCj7-n9FBckS1HPHGQ";
 
-
 class Home extends Component{
     render() {
         return(

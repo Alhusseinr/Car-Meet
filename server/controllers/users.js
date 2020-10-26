@@ -5,6 +5,10 @@ const auth = require('../auth');
 module.exports = {
     create(req, res) {
         const userInfo = { name, username, email, dob, password, followers, following, posts, active } = req.body;
+        userInfo.followers = 0;
+        userInfo.following = 0;
+        userInfo.posts = 0;
+        userInfo.active = true;
         console.log(userInfo);
 
         userServices
@@ -84,7 +88,6 @@ module.exports = {
 
     login(req, res) {
         const userInfo = { email, password } = req.body;
-
         userServices
             .getUser(userInfo)
             .then(user => {
@@ -100,13 +103,12 @@ module.exports = {
                         payload.Token = 'Bearer ' + data;
                         return res.status(200).json(payload);
                     }
-                    return res.status(400).json({ msg: 'Wrong email or password' })
+                    return res.status(400).json({ msg: 'Wrong email or password' });
                 }
-                return res.status(400).json({ msg: 'User does no exist' })
+                return res.status(400).json({ msg: 'User does no exist' });
             })
             .catch(e => {
                 return res.status(400).json({ msg: 'Something went wrong: ' + e })
             })
-
     }
 };
